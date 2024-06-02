@@ -1,0 +1,15 @@
+{
+  "name": "cab-comparisions",
+  "version": "1.0.0",
+  "description": "This will make the backend API calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sharma S S",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "request": "^2.88.2"
+  }
+}
