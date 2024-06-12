@@ -230,10 +230,14 @@ async function getUberPrice () {
     
     axios.request(config)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
+        
+      console.log(response.data.data.products.tiers[0].products);
+      return JSON.stringify(response.data);
     })
     .catch((error) => {
       console.log(error);
     });
 
 }
+
+module.exports = {getUberPrice};
