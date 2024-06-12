@@ -2,7 +2,6 @@
 const config_keys = require('./constants'); 
 const express = require('express');
 const axios = require('axios');
-const locData = require('./samplelocation.json');
 
 
 
@@ -18,22 +17,18 @@ app.get('/geocode', async (req, res) => {
 
   try {
 
-      let response = locData;   //await axios.get(url);
+      let response = await axios.get(url);
 
       let lat_pos = response?.data?.results[0]?.geometry?.location?.lat;
       let lng_pos = response?.data?.results[0]?.geometry?.location?.lng;
+
+      
   
       console.log(lat_pos, lng_pos);
   } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred while fetching the geocode data' });
   }
-});
-
-// Start the Express server
-const port = 5000;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
 });
 
 

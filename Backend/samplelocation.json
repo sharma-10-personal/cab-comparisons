@@ -1,0 +1,118 @@
+{ "data" :
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "Mysore Road",
+                    "short_name": "Mysore Rd",
+                    "types": [
+                        "route"
+                    ]
+                },
+                {
+                    "long_name": "Kenchenhalli",
+                    "short_name": "Kenchenhalli",
+                    "types": [
+                        "political",
+                        "sublocality",
+                        "sublocality_level_2"
+                    ]
+                },
+                {
+                    "long_name": "Rajarajeshwari Nagar",
+                    "short_name": "Rajarajeshwari Nagar",
+                    "types": [
+                        "political",
+                        "sublocality",
+                        "sublocality_level_1"
+                    ]
+                },
+                {
+                    "long_name": "Bengaluru",
+                    "short_name": "Bengaluru",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Bengaluru Urban",
+                    "short_name": "Bengaluru Urban",
+                    "types": [
+                        "administrative_area_level_3",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Bangalore Division",
+                    "short_name": "Bangalore Division",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Karnataka",
+                    "short_name": "KA",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "India",
+                    "short_name": "IN",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "560098",
+                    "short_name": "560098",
+                    "types": [
+                        "postal_code"
+                    ]
+                }
+            ],
+            "formatted_address": "Mysore Rd, Kenchenhalli, Rajarajeshwari Nagar, Bengaluru, Karnataka 560098, India",
+            "geometry": {
+                "location": {
+                    "lat": 12.9359899,
+                    "lng": 77.5177757
+                },
+                "location_type": "GEOMETRIC_CENTER",
+                "viewport": {
+                    "northeast": {
+                        "lat": 12.9370236802915,
+                        "lng": 77.5191773302915
+                    },
+                    "southwest": {
+                        "lat": 12.9343257197085,
+                        "lng": 77.51647936970849
+                    }
+                }
+            },
+            "partial_match": true,
+            "place_id": "ChIJF_CDDv0VrjsRZSYEiJYX8QE",
+            "plus_code": {
+                "compound_code": "WGP9+94 Bengaluru, Karnataka, India",
+                "global_code": "7J4VWGP9+94"
+            },
+            "types": [
+                "bowling_alley",
+                "cafe",
+                "establishment",
+                "food",
+                "grocery_or_supermarket",
+                "movie_theater",
+                "point_of_interest",
+                "shopping_mall",
+                "store"
+            ]
+        }
+    ],
+    "status": "OK"
+}
+}

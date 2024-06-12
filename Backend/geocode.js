@@ -1,6 +1,5 @@
 const config_keys = require('./constants'); 
 const axios = require('axios');
-const locData = require('./samplelocation.json');
 const location = require('./geocode');
 
 
@@ -9,6 +8,7 @@ async function getGeoCode (address) {
     let lat_pos, lng_pos;
 
     address = address ? address : 'gopalan arcade';
+    console.log('adress---------', address)
     let API_KEY = config_keys.google_maps_api_key;
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${API_KEY}`;
   

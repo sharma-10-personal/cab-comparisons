@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Your Locations</h2>
+        <form id="locationForm">
+            <label for="pickup">Pick-up Location:</label>
+            <input type="text" id="pickup" name="pickup" required>
+            <label for="drop">Drop Location:</label>
+            <input type="text" id="drop" name="drop" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
