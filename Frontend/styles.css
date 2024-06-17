@@ -24,7 +24,7 @@ body {
     text-align: center;
 }
 
-h1 {
+h2 {
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
@@ -71,9 +71,30 @@ button:hover {
     background-color: #0056b3;
 }
 
-#result {
+/* Table Styles */
+#fareTable {
+    width: 100%;
     margin-top: 20px;
-    font-size: 18px;
-    color: #333;
-    white-space: pre-line; /* Allows new lines to be displayed */
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#fareTable thead {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#fareTable th,
+#fareTable td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+#fareTable tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#fareTable tbody tr:hover {
+    background-color: #ddd;
 }

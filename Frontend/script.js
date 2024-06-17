@@ -1,42 +1,63 @@
-// document.getElementById('locationForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
-    
-//     const pickupLocation = document.getElementById('pickup').value;
-//     const dropLocation = document.getElementById('drop').value;
+document.getElementById('locationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-//     const data = {
-//         pickup: pickupLocation,
-//         drop: dropLocation
-//     };
+    const pickupAddress = document.getElementById('pickup').value;
+    const dropAddress = document.getElementById('drop').value;
 
-//     fetch('http://localhost:3000/', {
-//         method: 'GET', // Assuming you're making a POST request
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then(response => response.json())
-//     .then(result => {
-//         document.getElementById('result').innerText = `Response from API:\n${JSON.stringify(result, null, 2)}`;
-//     })
-//     .catch(error => {
-//         document.getElementById('result').innerText = `Error: ${error.message}`;
-//     });
+    const url = 'http://localhost:3000/get-all-fares';
+    const params = `pickup_address=${encodeURIComponent(pickupAddress)}&drop_address=${encodeURIComponent(dropAddress)}`;
 
-//     document.getElementById('result').innerText = `Pick-up Location: ${pickupLocation}\nDrop Location: ${dropLocation}`;
-// });
-    
+    fetch(`${url}?${params}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response from backend:', data);
+            displayFares(data); // Call function to display fares in table
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // Handle error
+        });
+});
 
+function displayFares(data) {
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = ''; // Clear existing table rows
 
-var x =7;
+    // Iterate over Ola data
+    for (const category in data.ola) {
+        const row = document.createElement('tr');
 
-function  getName() {
-    console.log('Namaste JavaScript');
-    newName();
-    function newName() {
-        console.log('inside 2')
+        const serviceCell = document.createElement('td');
+        serviceCell.textContent = 'Ola';
+        row.appendChild(serviceCell);
+
+        const categoryCell = document.createElement('td');
+        categoryCell.textContent = category;
+        row.appendChild(categoryCell);
+
+        const priceCell = document.createElement('td');
+        priceCell.textContent = data.ola[category].price;
+        row.appendChild(priceCell);
+
+        tableBody.appendChild(row);
+    }
+
+    // Iterate over Uber data
+    for (const service in data.uber) {
+        const row = document.createElement('tr');
+
+        const serviceCell = document.createElement('td');
+        serviceCell.textContent = 'Uber';
+        row.appendChild(serviceCell);
+
+        const categoryCell = document.createElement('td');
+        categoryCell.textContent = service;
+        row.appendChild(categoryCell);
+
+        const priceCell = document.createElement('td');
+        priceCell.textContent = data.uber[service].price;
+        row.appendChild(priceCell);
+
+        tableBody.appendChild(row);
     }
 }
-
-getName();

@@ -16,7 +16,20 @@
             <input type="text" id="drop" name="drop" required>
             <button type="submit">Submit</button>
         </form>
-        <div id="result"></div>
+        <div id="result">
+            <table id="fareTable">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Table rows will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

@@ -1,8 +1,17 @@
 const axios = require('axios');
+const { uber_equivalents } = require('./constants');
 
 
 
-async function getUberPrice () {
+async function getUberPrice (ride_coordinates) {
+
+  let pickup_lat = ride_coordinates.pickup_coordinates.latitude;
+  let pickup_long = ride_coordinates.pickup_coordinates.longitude;
+  let drop_lat = ride_coordinates.drop_coordinates.latitude;
+  let drop_long = ride_coordinates.drop_coordinates.longitude;      
+
+
+    let cab_prices, auto_prices;
     let data = JSON.stringify({
       query: `query Products($destinations: [InputCoordinate!]!, $includeRecommended: Boolean = false, $pickup: InputCoordinate!, $pickupFormattedTime: String, $profileType: String, $profileUUID: String, $returnByFormattedTime: String, $stuntID: String, $targetProductType: EnumRVWebCommonTargetProductType) {
       products(
@@ -213,7 +222,7 @@ async function getUberPrice () {
       perTemporalUnit
       __typename
     }`,
-      variables: {"includeRecommended":false,"destinations":[{"latitude":13.0198324,"longitude":77.7097387}],"pickup":{"latitude":12.9880043,"longitude":77.6893675}}
+      variables: {"includeRecommended":false,"destinations":[{"latitude":drop_lat,"longitude":drop_long}],"pickup":{"latitude":pickup_lat,"longitude":pickup_long}}
     });
     
     let config = {
@@ -227,16 +236,42 @@ async function getUberPrice () {
       },
       data : data
     };
-    
-    axios.request(config)
-    .then((response) => {
-        
-      console.log(response.data.data.products.tiers[0].products);
-      return JSON.stringify(response.data);
-    })
-    .catch((error) => {
+  
+   try{ 
+    let uber_response = await axios.request(config)
+
+
+    auto_prices = uber_response.data.data.products.tiers[0].products[0].fare;
+
+    cab_prices = uber_response.data.data.products.tiers[1].products;
+
+       let product_val = cab_prices.reduce((all_prices, item) => {
+        if(item.hasOwnProperty('description') && item.hasOwnProperty('fare')) {
+
+            if(!all_prices) {
+                all_prices ={};
+            }
+     
+            switch (item.description) {
+              case "UberXL":
+              case "Premier":
+              case "Go Sedan":
+              case "UberXS":
+                all_prices[uber_equivalents[item.description]] = { "price" : item.fare};
+                break;
+            }
+        }
+        all_prices["Auto"] = {"price" : auto_prices }
+        return all_prices;
+       },{})
+      console.log('aaaaaa',product_val);
+      // console.log(response.data.data.products.tiers[1].products);
+      return product_val;
+      }
+    catch(error)  {
       console.log(error);
-    });
+      throw error;
+    };
 
 }
 
