@@ -2,9 +2,9 @@
   "name": "cab-comparisions",
   "version": "1.0.0",
   "description": "This will make the backend API calls",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "devStart": "nodemon index.js",
+    "devStart": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sharma S S",
