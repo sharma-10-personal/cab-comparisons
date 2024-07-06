@@ -1,6 +1,6 @@
 const axios = require('axios');
-const { uber_equivalents } = require('../constants');
-const constants = require('../constants');
+const { uber_equivalents } = require('../config/config');
+const constants = require('../config/config');
 
 
 

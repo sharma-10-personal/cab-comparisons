@@ -1,6 +1,6 @@
 const { default: axios } = require("axios");
-const { ola_equivalents, ola_cookie_key } = require("../constants");
-const constants = require("../constants");
+const { ola_equivalents, ola_cookie_key } = require("../config/config");
+const constants = require("../config/config");
 
 async function getOlaPrice (ride_coordinates) {
 

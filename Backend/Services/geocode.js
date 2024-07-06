@@ -1,4 +1,4 @@
-const config_keys = require('../constants'); 
+const config_keys = require('../config/config'); 
 const axios = require('axios');
 const location = require('./geocode');
 

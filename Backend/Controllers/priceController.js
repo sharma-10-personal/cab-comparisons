@@ -1,4 +1,4 @@
-const priceServices = require('../Services/priceServices')
+const priceServices = require('../services/priceServices')
 
 
 exports.pricesFromCab = (req, res) => {
