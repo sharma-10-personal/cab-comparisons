@@ -1,7 +1,7 @@
 const express = require('express');
-const location = require('../geocode');
-const ola = require('../ola')
-const uber = require('../uber');
+const location = require('./geocode');
+const ola = require('./ola')
+const uber = require('./uber');
 const cors = require('cors');
 
 
