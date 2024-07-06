@@ -2,9 +2,6 @@
 const config_keys = require('./constants'); 
 const express = require('express');
 const axios = require('axios');
-
-
-
 const app = express();
 
 
@@ -22,8 +19,6 @@ app.get('/geocode', async (req, res) => {
       let lat_pos = response?.data?.results[0]?.geometry?.location?.lat;
       let lng_pos = response?.data?.results[0]?.geometry?.location?.lng;
 
-      
-  
       console.log(lat_pos, lng_pos);
   } catch (error) {
       console.error(error);
