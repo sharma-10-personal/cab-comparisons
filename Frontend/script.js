@@ -4,7 +4,7 @@ document.getElementById('locationForm').addEventListener('submit', function(even
     const pickupAddress = document.getElementById('pickup').value;
     const dropAddress = document.getElementById('drop').value;
 
-    const url = 'http://localhost:3000/get-all-fares';
+    const url = 'http://localhost:3000/v1/get-fares';
     const params = `pickup_address=${encodeURIComponent(pickupAddress)}&drop_address=${encodeURIComponent(dropAddress)}`;
 
     fetch(`${url}?${params}`)
