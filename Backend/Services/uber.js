@@ -256,6 +256,7 @@ async function getUberPrice(ride_coordinates) {
           case "Premier":
           case "Go Sedan":
           case "UberXS":
+          case "Uber Go":
             all_prices[uber_equivalents[item.description]] = {
               price: item.fare,
             };

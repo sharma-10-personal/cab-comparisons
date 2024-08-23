@@ -12,8 +12,8 @@ async function getPrices(req, res) {
     drop_coor,
     ride_coordinates = {};
 
-  pickup_address = "whitefield"; //req.query.pickup_address ? req.query.pickup_address : "";
-  drop_address = "Mahaveer galaxy"; //req.query.drop_address ? req.query.drop_address : "";
+  pickup_address = req.query.pickup_address ? req.query.pickup_address : "";
+  drop_address = req.query.drop_address ? req.query.drop_address : "";
 
   pick_coor = await location.getGeoCode(pickup_address);
   drop_coor = await location.getGeoCode(drop_address);

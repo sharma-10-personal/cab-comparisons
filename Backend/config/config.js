@@ -8,6 +8,7 @@ module.exports = {
     UberXL: "Suv",
     Premier: "Sedan",
     UberXS: "Hatchback",
+    "Uber Go": "Hatchback",
   },
   ola_equivalents: {
     prime: "Sedan",
