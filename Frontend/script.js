@@ -1,63 +1,55 @@
-document.getElementById('locationForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("fareForm");
+  const loader = document.getElementById("loader");
+  const fareTable = document.getElementById("fareTable");
+  const fareTableBody = fareTable.getElementsByTagName("tbody")[0];
 
-    const pickupAddress = document.getElementById('pickup').value;
-    const dropAddress = document.getElementById('drop').value;
+  form.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
 
-    const url = 'http://localhost:3000/v1/get-fares';
-    const params = `pickup_address=${encodeURIComponent(pickupAddress)}&drop_address=${encodeURIComponent(dropAddress)}`;
+    const pickupAddress = document.getElementById("pickup_address").value;
+    const dropAddress = document.getElementById("drop_address").value;
 
-    fetch(`${url}?${params}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response from backend:', data);
-            displayFares(data); // Call function to display fares in table
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            // Handle error
+    loader.style.display = "block"; // Show loader
+    fareTable.style.display = "none"; // Hide table initially
+
+    fetch(
+      `http://localhost:3000/v1/get-fares?pickup_address=${encodeURIComponent(
+        pickupAddress
+      )}&drop_address=${encodeURIComponent(dropAddress)}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        loader.style.display = "none"; // Hide loader
+        fareTable.style.display = "table"; // Show table
+
+        // Clear any existing rows
+        fareTableBody.innerHTML = "";
+
+        const services = [
+          { name: "ola", img: "ola.png" },
+          { name: "uber", img: "uber.png" },
+        ];
+        const vehicleTypes = ["Auto", "Suv", "Sedan", "Hatchback"];
+
+        services.forEach((service) => {
+          let row = fareTableBody.insertRow();
+          let cellService = row.insertCell();
+          cellService.innerHTML = `<img src="${service.img}" alt="${service.name}" class="service-logo">`;
+
+          vehicleTypes.forEach((type) => {
+            let cell = row.insertCell();
+            if (data[service.name] && data[service.name][type]) {
+              cell.textContent = data[service.name][type].price;
+            } else {
+              cell.textContent = "-";
+            }
+          });
         });
+      })
+      .catch((error) => {
+        loader.style.display = "none"; // Hide loader
+        console.error("Error fetching data:", error);
+      });
+  });
 });
-
-function displayFares(data) {
-    const tableBody = document.getElementById('tableBody');
-    tableBody.innerHTML = ''; // Clear existing table rows
-
-    // Iterate over Ola data
-    for (const category in data.ola) {
-        const row = document.createElement('tr');
-
-        const serviceCell = document.createElement('td');
-        serviceCell.textContent = 'Ola';
-        row.appendChild(serviceCell);
-
-        const categoryCell = document.createElement('td');
-        categoryCell.textContent = category;
-        row.appendChild(categoryCell);
-
-        const priceCell = document.createElement('td');
-        priceCell.textContent = data.ola[category].price;
-        row.appendChild(priceCell);
-
-        tableBody.appendChild(row);
-    }
-
-    // Iterate over Uber data
-    for (const service in data.uber) {
-        const row = document.createElement('tr');
-
-        const serviceCell = document.createElement('td');
-        serviceCell.textContent = 'Uber';
-        row.appendChild(serviceCell);
-
-        const categoryCell = document.createElement('td');
-        categoryCell.textContent = service;
-        row.appendChild(categoryCell);
-
-        const priceCell = document.createElement('td');
-        priceCell.textContent = data.uber[service].price;
-        row.appendChild(priceCell);
-
-        tableBody.appendChild(row);
-    }
-}
