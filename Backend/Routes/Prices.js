@@ -1,8 +1,15 @@
 const express = require("express");
-const { pricesFromCab } = require("../Controllers/PriceController");
+const { getPricesFromCab } = require("../Controllers/PriceController");
 
 const router = express.Router();
 
-router.get("/get-fares", pricesFromCab);
+console.log("Initializing routes...");
+
+router.get("/get-fares", (req, res) => {
+  console.log("Received GET request on /get-fares");
+  getPricesFromCab(req, res);
+});
+
+console.log("Routes initialized successfully.");
 
 module.exports = router;

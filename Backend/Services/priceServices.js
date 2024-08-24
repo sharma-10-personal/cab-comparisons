@@ -1,43 +1,37 @@
-const express = require("express");
 const location = require("./geocode");
 const ola = require("./ola");
 const uber = require("./uber");
-const cors = require("cors");
 
 async function getPrices(req, res) {
-  //main code
-  let pickup_address,
-    drop_address,
-    pick_coor,
-    drop_coor,
-    ride_coordinates = {};
+  console.log("Started processing price request.");
 
-  pickup_address = req.query.pickup_address ? req.query.pickup_address : "";
-  drop_address = req.query.drop_address ? req.query.drop_address : "";
-
-  pick_coor = await location.getGeoCode(pickup_address);
-  drop_coor = await location.getGeoCode(drop_address);
-
-  ride_coordinates.drop_coordinates = pick_coor;
-  ride_coordinates.pickup_coordinates = drop_coor;
+  let pickup_address = req.query.pickup_address || "";
+  let drop_address = req.query.drop_address || "";
+  let ride_coordinates = {};
 
   try {
-    // Start both requests concurrently
-    const olaPricePromise = ola.getOlaPrice(ride_coordinates);
-    const uberPricePromise = uber.getUberPrice(ride_coordinates);
+    console.log("Getting geocodes for pickup and drop addresses.");
+    const pick_coor = await location.getGeoCode(pickup_address);
+    const drop_coor = await location.getGeoCode(drop_address);
 
-    // Wait for both promises to resolve
-    const olaPriceResponse = await olaPricePromise;
-    const uberPriceResponse = await uberPricePromise;
+    ride_coordinates = {
+      pickup_coordinates: pick_coor,
+      drop_coordinates: drop_coor,
+    };
 
-    // Parse responses or handle them as needed
-    const olaCategories = olaPriceResponse;
-    const uberCategories = uberPriceResponse; // Assuming uber.getUberPrice() returns the price directly
+    console.log("Geocodes retrieved:", ride_coordinates);
 
-    res.send({ ola: olaCategories, uber: uberCategories });
+    console.log("Fetching prices from Ola and Uber...");
+    const [olaPriceResponse, uberPriceResponse] = await Promise.all([
+      ola.getOlaPrice(ride_coordinates),
+      uber.getUberPrice(ride_coordinates),
+    ]);
+
+    console.log("Prices fetched successfully.");
+    res.send({ ola: olaPriceResponse, uber: uberPriceResponse });
   } catch (error) {
     console.error("Error fetching prices:", error);
-    throw error; // Optionally re-throw or handle the error
+    res.status(500).send({ message: "Internal server error" });
   }
 }
 
