@@ -1,12 +1,10 @@
 const config_keys = require("../config/config");
 const axios = require("axios");
-const location = require("./geocode");
 
 async function getGeoCode(address) {
-  let lat_pos, lng_pos;
+  console.log("Fetching geocode for address:", address);
 
-  address = address ? address : "";
-  let API_KEY = config_keys.google_maps_api_key;
+  const API_KEY = config_keys.google_maps_api_key;
   const url = `https://${
     config_keys.google_maps_api.url
   }/maps/api/geocode/json?address=${encodeURIComponent(
@@ -14,23 +12,26 @@ async function getGeoCode(address) {
   )}&key=${API_KEY}`;
 
   try {
-    let response = await axios.get(url);
+    const response = await axios.get(url);
+    console.log("Geocode API response received.");
 
-    lat_pos = response?.data?.results[0]?.geometry?.location?.lat;
-    lng_pos = response?.data?.results[0]?.geometry?.location?.lng;
+    const lat_pos = response?.data?.results[0]?.geometry?.location?.lat;
+    const lng_pos = response?.data?.results[0]?.geometry?.location?.lng;
+
+    if (lat_pos && lng_pos) {
+      console.log("Geocode coordinates:", {
+        latitude: lat_pos,
+        longitude: lng_pos,
+      });
+      return { latitude: lat_pos, longitude: lng_pos };
+    } else {
+      console.error("No coordinates found for the provided address.");
+      return null;
+    }
   } catch (error) {
-    console.error(error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while fetching the geocode data" });
+    console.error("Error occurred while fetching geocode data:", error.message);
+    return null; // Return null to indicate failure in fetching geocode
   }
-
-  let coordinates = {
-    latitude: lat_pos,
-    longitude: lng_pos,
-  };
-
-  return coordinates;
 }
 
 module.exports = {

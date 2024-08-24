@@ -239,10 +239,10 @@ async function getUberPrice(ride_coordinates) {
   };
 
   try {
+    console.log("Sending request to Uber API...");
     let uber_response = await axios.request(config);
 
     auto_prices = uber_response.data.data.products.tiers[0].products[0].fare;
-
     cab_prices = uber_response.data.data.products.tiers[1].products;
 
     let product_val = cab_prices.reduce((all_prices, item) => {
@@ -266,9 +266,11 @@ async function getUberPrice(ride_coordinates) {
       all_prices["Auto"] = { price: auto_prices };
       return all_prices;
     }, {});
+    console.log("Uber prices processed successfully:", product_val);
+
     return product_val;
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching Uber prices:", error.message);
     throw error;
   }
 }
