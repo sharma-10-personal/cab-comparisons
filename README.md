@@ -7,9 +7,7 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 
