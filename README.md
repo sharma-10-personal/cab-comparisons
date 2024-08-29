@@ -60,7 +60,7 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 4. **Start the server**
 
     ```bash
-    npm start
+    npm run start
     ```
 
     Open the index.html file in your web browser to view the application.
