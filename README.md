@@ -43,7 +43,6 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
     ```bash
     npm install
 
-
 3. **Configure Environment Variables**
 
     Obtain a Google API key for Geocode services.
@@ -62,5 +61,6 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 
     ```bash
     npm start
+    ```
 
     Open the index.html file in your web browser to view the application.
