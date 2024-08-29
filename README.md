@@ -54,6 +54,7 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
     GOOGLE_API_KEY=your_google_api_key
     UBER_KEY=your_uber_cookie
     OLA_KEY=your_ola_cookie
+    ```
 
     Run the Project
 
@@ -61,5 +62,5 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 
     ```bash
     npm start
-    
+
     Open the index.html file in your web browser to view the application.
