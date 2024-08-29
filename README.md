@@ -35,11 +35,12 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 
    ```bash
    git clone https://github.com/sharma-10-personal/cab-comparisons
-   cd ola-uber-comparison
+   cd Backend
 
 2. **Install Dependencies**
 
     Ensure you have Node.js installed. Install the necessary packages:
+    ```bash
     npm install
 
 
@@ -47,13 +48,18 @@ This project compares cab fares between Ola and Uber using Google Geocode APIs f
 
     Obtain a Google API key for Geocode services.
     Get the cookies for Ola and Uber by logging into your accounts.
-    Create a .env file in the root directory with the following content:
+    Create a .env file in the root directory with the following content as shown in .env.example:
+
+    ```bash
     GOOGLE_API_KEY=your_google_api_key
     UBER_KEY=your_uber_cookie
     OLA_KEY=your_ola_cookie
+
     Run the Project
 
 4. **Start the server**
 
+    ```bash
     npm start
+    
     Open the index.html file in your web browser to view the application.
